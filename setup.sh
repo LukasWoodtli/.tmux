@@ -7,6 +7,13 @@ readonly THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null 
 readonly TMUX_CONF_FILE_HOME="$HOME/.tmux.conf"
 readonly TMUX_CONF_FILE_REPO="$THIS_SCRIPT_DIR/tmux.conf"
 
+# setup plugins
+pushd "$THIS_SCRIPT_DIR"
+git submodule init
+git submodule update
+./plugins/tpm/bindings/install_plugins
+popd
+
 if [ -f "$TMUX_CONF_FILE_HOME" ]
 then
 	echo ".tmux.conf file exists: create backup file .tmux.conf.bak"
