@@ -13,7 +13,9 @@ then
 	pushd "$THIS_SCRIPT_DIR"
 	git submodule init
 	git submodule update
-	./plugins/tpm/bindings/install_plugins
+	tmux new-session -s temp -d
+	tmux send-keys -t temp "shell ./plugins/tpm/bindings/install_plugins C-m"
+	tmux kill-session -t temp
 	popd
 fi
 
