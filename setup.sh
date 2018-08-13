@@ -14,7 +14,7 @@ then
 	git submodule init
 	git submodule update
 	tmux new-session -s temp -d
-	tmux send-keys -t temp "shell ./plugins/tpm/bindings/install_plugins C-m"
+	tmux send-keys -t temp './plugins/tpm/bindings/install_plugins' C-m
 	tmux kill-session -t temp
 	popd
 fi
