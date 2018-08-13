@@ -7,12 +7,15 @@ readonly THIS_SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null 
 readonly TMUX_CONF_FILE_HOME="$HOME/.tmux.conf"
 readonly TMUX_CONF_FILE_REPO="$THIS_SCRIPT_DIR/tmux.conf"
 
-# setup plugins
-pushd "$THIS_SCRIPT_DIR"
-git submodule init
-git submodule update
-./plugins/tpm/bindings/install_plugins
-popd
+# setup plugins (only available from tmux 1.9 upwards)
+if [ `tmux -V | sed 's#tmux \([0-9]\)\.\([0-9]\)#\1\2#'` -ge 19 ]
+then
+	pushd "$THIS_SCRIPT_DIR"
+	git submodule init
+	git submodule update
+	./plugins/tpm/bindings/install_plugins
+	popd
+fi
 
 if [ -f "$TMUX_CONF_FILE_HOME" ]
 then
